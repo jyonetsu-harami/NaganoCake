@@ -1,17 +1,17 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>Bookers</span></a>
+      <a class="navbar-brand" href="/"><span>NaganoCake</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
-          <li><%= link_to ' Home',customers_path(current_user),class: 'fas fa-home nav-link text-light' %></li>
-          <li><%= link_to ' Users',customers_path,class: 'fas fa-users nav-link text-light' %></li>
+          <li><%= link_to ' Home',customer_path(current_customer),class: 'fas fa-home nav-link text-light' %></li>
+          <!--<li><= link_to ' Users',customer_path,class: 'fas fa-users nav-link text-light' %></li>-->
             <!--<li>book indexのリンクでした</li>-->
-          <li><%= link_to ' logout', destroy_costomers_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
+          <li><%= link_to ' logout', destroy_customer_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
         <% else %>
           <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' About',about_path,class: 'fas fa-link nav-link text-light' %></li>
