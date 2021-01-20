@@ -1,0 +1,7 @@
+show
+<%= @product.name %>
+<%= @product.price %>
+<%= @product.price*1.1 %>
+
+<%= attachment_image_tag @product, :image, :fill, 300, 300, format: 'jpeg', fallback: "no_image.jpg", size:"300x300" %>
+
