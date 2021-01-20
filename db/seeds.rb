@@ -15,7 +15,6 @@ Genre.create!(
   name: 'ケーキ',
   is_active: 'true',
 )
-
 Product.create!(
   genre_id: 1,
   image_id: '1',
@@ -24,7 +23,6 @@ Product.create!(
   price: 600,
   sales_status: 0,
 )
-
 Customer.create!(
   email: '1@1',
   password: 'aaaaaa',
