@@ -11,6 +11,10 @@ Admin.find_or_create_by(id: 1) do |admin|
  admin.password = "aaaaaa"
 end
 
+Genre.create!(
+  name: 'ケーキ',
+  is_active: 'true',
+)
 Product.create!(
   genre_id: 1,
   image_id: '1',
@@ -19,11 +23,6 @@ Product.create!(
   price: 600,
   sales_status: 0,
 )
-Genre.create!(
-  name: 'ケーキ',
-  is_active: 'true',
-)
-
 Customer.create!(
   email: '1@1',
   password: 'aaaaaa',
