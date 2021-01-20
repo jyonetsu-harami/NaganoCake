@@ -23,6 +23,7 @@ Product.create!(
   price: 600,
   sales_status: 0,
 )
+
 Customer.create!(
   email: '1@1',
   password: 'aaaaaa',
