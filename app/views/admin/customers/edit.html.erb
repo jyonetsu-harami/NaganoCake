@@ -1,0 +1,44 @@
+<%= form_with model: [:admin, @customer], method: :patch, local: true  do |f| %>
+  <h4><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報</h4>
+  <table>
+    <tr>
+      <td><p>会員ID</p></td>
+      <td><%= @customer.id %></td>
+    </tr>
+      <tr>
+        <td><%= f.label :last_name, "氏名" %></td>
+        <td><%= f.text_field :last_name %><%= f.text_field :first_name %></td>
+      </tr>
+      <tr>    
+        <td><%= f.label :last_name_kana, "フリガナ" %></td>
+        <td><%= f.text_field :last_name_kana %><%= f.text_field :first_name_kana %></td>
+      </tr>
+      <tr>    
+        <td><%= f.label :zipcode, "郵便番号" %></td>
+        <td><%= f.text_field :zipcode %></td>
+      </tr>
+      <tr>    
+        <td><%= f.label :address, "住所" %></td>
+        <td><%= f.text_field :address %></td>
+      </tr>
+      <tr>    
+        <td><%= f.label :phone_number, "電話番号" %></td>
+        <td><%= f.text_field :phone_number %></td>
+      </tr>
+      <tr>    
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td><%= f.email_field :email %></td>
+      </tr>
+      <tr>    
+        <td><%= f.label :is_active, "会員ステータス" %></td>
+        <td>
+          <%= f.radio_button :is_active, :true %> <%= f.label :is_active, "有効" %>
+          <%= f.radio_button :is_active, :false %> <%= f.label :is_active, "退会" %>
+        </td>
+      </tr>  
+      <tr><td><%= f.submit "変更を保存", class: "btn btn-success" %></td></tr>
+  </table>
+<% end %>
+
+
+
