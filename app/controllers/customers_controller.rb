@@ -1,5 +1,4 @@
 class CustomersController < ApplicationController
-  before_action :authenticate_customer!
   
   def show
     @customer = current_customer
@@ -10,6 +9,9 @@ class CustomersController < ApplicationController
   end
 
   def update
+    @customer = Customer.find(params[:id])
+    @customer.update(customer_params)
+    redirect_to customer_path(@customer.id)
   end
 
   def unsubscribe
@@ -18,8 +20,9 @@ class CustomersController < ApplicationController
   def withdraw
     @customer = Customer.find(current_customer.id)
     @customer.update(is_active: false)
-    reset_session
+    @customer.save
     redirect_to root_path
+    flash[:notice] = "ご利用ありがとうございました。"
   end
 
   private

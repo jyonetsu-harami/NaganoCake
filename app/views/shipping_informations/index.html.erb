@@ -16,7 +16,7 @@
           <div class="field">
             <tr>
               <td>住所</td>
-              <td><%= f.text_field :address %></td>
+              <td><%= f.text_field :address, :size => "60*60" %></td>
             </tr>
           </div>
           <div class="field">
@@ -31,26 +31,23 @@
   </div>
   <% end %>
 
-
-  <div class="row">
-    <div class="col-xs-7">
-      <table class="table table-bordered">
-        <tr class="active">
-          <th>郵便番号</th>
-          <th>住所</th>
-          <th>宛名</th>
-          <th></th>
+     <table class="table table-bordered">
+      <tr class="active">
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>宛名</th>
+        <th></th>
+      </tr>
+      <% @shipping_informations.each do |shipping_information|%>
+        <tr>
+          <td><%= shipping_information.zipcode %></td>
+          <td><%= shipping_information.address %></td>
+          <td><%= shipping_information.name %></td>
+          <td>
+            <%= link_to "編集する",edit_shipping_information_path(shipping_information.id), class: "btn-sm btn btn-success" %>
+            <%= link_to "削除する",shipping_information_path(shipping_information.id) , method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+          </td>
         </tr>
-        <% @shipping_informations.each do |shipping_information|%>
-          <tr>
-            <td><%=shipping_information.zipcode%></td>
-            <td><%=shipping_information.address%></td>
-            <td><%=shipping_information.name%></td>
-            <td align="center">
-                <%= link_to "編集する",edit_shipping_information_path(shipping_information.id), class: "btn-sm btn btn-success" %>
-                <%= link_to "削除する",shipping_information_path(shipping_information.id) , method: :delete, class: "btn-sm btn-danger" %></td>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-  </div>
+      <% end %>
+    </table>
+</div>

@@ -1,94 +1,46 @@
-	<%= form_with model:@customer, url:'', local:true do |f| %>
+	<%= form_with model:@customer, method: :patch, local:true do |f| %>
     <div class="row">
       <div class="form-group">
       	<table>
       		<h4>会員情報編集</h4>
-        <tr>
-        	<div class="customer-form">
-          	<th><%= f.label "氏名" %></th>
-
-        	<div class="col-md-2">
-         	 <th><%= f.text_field :last_name %></th>
-        	</div>
-
-        	<div class="col-xs-2">
-        	  <th><%= f.text_field :first_name %></th>
-        	</div>
-     	 	</div>
-     	 </tr>
-
-      <tr>
-      <div class="form-group">
-        <div class="col-xs-2">
-          <th><%= f.label "フリガナ"%></th>
-        </div>
-
-        <div class="col-xs-2">
-          <th><%= f.text_field :last_name_kana %></th>
-        </div>
-
-        <div class="col-xs-2">
-         <th><%= f.text_field :first_name_kana %></th>
-        </div>
-      </div>
-      </tr>
-
-		<tr>
-      <div class="form-group">
-        <div class="col-xs-3">
-          <th><%= f.label "郵便番号" %></th>
-        </div>
-        <div class="col-xs-9">
-          <th><%= f.text_field :zipcode %></th>
-        </div>
-      </div>
-      </tr>
-
-		<tr>
-      <div class="form-group">
-        <div class="col-xs-3">
-          <th><%= f.label "住所" %></th>
-        </div>
-        <div class="col-xs-9">
-          <th><%= f.text_field :address, :size => "63*63" %></th>
-        </div>
-      </div>
-      </tr>
-
-		<tr>
-      <div class="form-group">
-        <div class="col-xs-3">
-          <th><%= f.label "電話番号"%></th>
-        </div>
-        <div class="col-xs-9">
-          <th><%= f.text_field :phone_number %></th>
-        </div>
-      </div>
-      </tr>
-
-      <tr>
-      <div class="form-group">
-        <div class="col-xs-3">
-          <th><%= f.label "メールアドレス" %></th>
-        </div>
-        <div class="col-xs-9">
-          <th><%= f.email_field :email, autocomplete: "email" %></th>
-        </div>
-      </div>
-      </th>
-
-    </table>
-      </div>
+            <tr>
+        	    <div class="customer-form">
+          	    <th><%= f.label "氏名" %></th>
+         	      <th><%= f.text_field :last_name %></th>
+         	      <th><%= f.text_field :first_name %></th>
+     	      </tr>
+            <tr>
+              <th><%= f.label "フリガナ"%></th>
+              <th><%= f.text_field :last_name_kana %></th>
+              <th><%= f.text_field :first_name_kana %></th>
+            </tr>
+		        <tr>
+              <th><%= f.label "郵便番号" %></th>
+              <th><%= f.text_field :zipcode %></th>
+            </tr>
+            <tr>
+              <th><%= f.label "住所" %></th>
+              <th><%= f.text_field :address, :size => "60*60" %></th>
+            </tr>
+            <tr>
+              <th><%= f.label "電話番号"%></th>
+              <th><%= f.text_field :phone_number %></th>
+            </tr>
+            <tr>
+              <th><%= f.label "メールアドレス" %></th>
+              <th><%= f.email_field :email, autocomplete: "email" %></th>
+            </th>
+         </table>
+       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-4 col-xs-offset-3">
-        <%= f.submit "編集内容を保存", class: "btn btn-success", style: "margin-right: 70px;" %>
+        <%= f.submit "編集内容を保存", class: "btn btn-success" %>
         <%= link_to "退会する", unsubscribe_customer_path, class: "btn btn-danger" %>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 
- 

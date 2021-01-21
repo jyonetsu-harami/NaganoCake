@@ -6,13 +6,14 @@ class ShippingInformationsController < ApplicationController
   end
 
   def edit
-    @shipping_information = ShippingInformation.find(params[:id]) 
+    @shipping_information = ShippingInformation.find(params[:id])
   end
 
   def update
-    @shipping_information = current_customer.shipping_informations.find(params[:id])
-    @shipping_information.update(shipping_information_params)
-    redirect_to customer_shipping_informations_path , notice: "配送先情報を更新しました"
+    @shipping_information = ShippingInformation.find(params[:id])
+		@shipping_information.update(shipping_information_params)
+      redirect_to shipping_informations_path
+      flash[:notice] = "配送先を編集しました。"
   end
 
   def create
@@ -21,10 +22,11 @@ class ShippingInformationsController < ApplicationController
     redirect_to shipping_informations_path , notice: "配送先を新規登録しました"
   end
 
-  def destory
-    @shipping_information = current_customer.shipping_informations.find(params[:id])
-  	@shipping_information.destory
-  	redirect_to shipping_information_path , notice: "配送先を削除しました"
+  def destroy
+    @shipping_information = ShippingInformation.find(params[:id])
+    @shipping_information.destroy
+    flash[:notice] = "配送先を削除しました。"
+    redirect_to shipping_informations_path
   end
 
   private
