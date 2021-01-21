@@ -1,0 +1,56 @@
+<!--配送先登録、一覧-->
+
+<%= form_with model:@customer, url:'/shipping_informations', local:true do |f| %>
+<div class="container">
+  <h4 class="col-xs-8 col-xs-offset-2">配送先登録／一覧</h4>
+
+  <div class="row">
+    <table class="input-table">
+      <tbody>
+          <div class="field">
+            <tr>
+              <td>郵便番号(ハイフンなし)</td>
+              <td><%= f.text_field :zipcode %></td>
+            </tr>
+          </div>
+          <div class="field">
+            <tr>
+              <td>住所</td>
+              <td><%= f.text_field :address %></td>
+            </tr>
+          </div>
+          <div class="field">
+            <tr>
+              <td>宛名</td>
+              <td><%= f.text_field :name %></td>
+              <td style="padding-left: 60px;"><%= f.submit '新規登録', class: "btn btn-success" %></td>
+            </tr>
+          </div>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-xs-7">
+      <table class="table table-bordered">
+        <tr class="active">
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+          <th></th>
+        </tr>
+        <% @shipping_informations.each do |shipping_information|%>
+          <tr>
+            <td><%=shipping_information.zipcode%></td>
+            <td><%=shipping_information.address%></td>
+            <td><%=shipping_information.name%></td>
+            <td align="center">
+                <%= link_to "編集する",edit_shipping_information_path(shipping_information.id), class: "btn-sm btn btn-success" %>
+                <%= link_to "削除する",shipping_information_path(shipping_information.id) , method: :delete, class: "btn-sm btn-danger" %></td>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+  </div>
