@@ -10,6 +10,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
+    @product = Prpduct.new(product_params)
+    @product.save
+    redirect_to admin_product_path()
   end
 
   def show
