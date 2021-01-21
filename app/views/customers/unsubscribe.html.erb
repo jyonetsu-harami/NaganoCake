@@ -1,6 +1,7 @@
 <div class="row withdraw-text">
-    <h2 align="center">本当に退会しますか？</h2>
+    <h4 align="center">本当に退会しますか？</h4>
   </div>
+  <br>
   <div class="row withdraw-text">
     <p class="withdraw-info" align="center">
       退会すると、会員登録情報や<br>
@@ -9,7 +10,7 @@
     </p>
   </div>
   <div class="row withdraw-text"  align="center">
-    <%= link_to "退会しない", class: "btn btn-primary" %>
-    <%= link_to "退会する", class: "btn btn-danger" %>
+    <%= link_to "退会しない", customer_path(current_customer.id),  class: "btn btn-primary" %>
+    <%= link_to "退会する", withdraw_customer_path, method: :patch, class: "btn btn-danger" %>
   </div>
 </div>

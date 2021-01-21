@@ -35,6 +35,6 @@ Rails.application.routes.draw do
       patch :withdraw
     end
   end
-  resources :shipping_informations, only: [:index, :create, :edit, :update, :destory]
-
+  resources :shipping_informations, only: [:index, :create, :edit, :update, :destroy]
+# destoryからdestroyへ変更
 end

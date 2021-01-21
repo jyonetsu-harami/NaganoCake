@@ -1,0 +1,28 @@
+<%= form_with model: @shipping_information, method: :patch, local:true do |f| %>
+ <h4 class="col-xs-8 col-xs-offset-2">配送先編集</h4>
+  <div class="row">
+    <table class="input-table">
+      <tbody>
+          <div class="field">
+            <tr>
+              <td>郵便番号(ハイフンなし)</td>
+              <td><%= f.text_field :zipcode %></td>
+            </tr>
+          </div>
+          <div class="field">
+            <tr>
+              <td>住所</td>
+              <td><%= f.text_field :address, :size => "60*60" %></td>
+            </tr>
+          </div>
+          <div class="field">
+            <tr>
+              <td>宛名</td>
+              <td><%= f.text_field :name %></td>
+              <td style="padding-left: 60px;"><%= f.submit '変更内容を保存', class: "btn btn-success" %></td>
+            </tr>
+          </div>
+      </tbody>
+    </table>
+  </div>
+<% end %>
