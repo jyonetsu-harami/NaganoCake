@@ -1,0 +1,23 @@
+
+<%= form_with model: @order, local: true do |f| %>
+  <h4>注文情報入力</h4>
+<!--支払方法-->
+  <h5>支払方法</h5>
+  <%= f.radio_button :peyment_method, :クレジットカード, checked: true %> <%= f.label :payment_method, "クレジットカード" %>
+  <%= f.radio_button :peyment_method, :銀行振り込み %> <%= f.label :payment_method, "銀行振込" %>
+<!--お届け先-->
+  <h5>お届け先</h5>
+  <!--ご自身の住所-->
+
+  <!--登録済住所から選択-->
+  <!--分からない！-->
+  <input>
+  
+  <!--新しいお届け先-->
+  <%= f.label :zipcode, "郵便番号（ハイフンなし）", class: "col-3"%>
+  <%= f.text_field :zipcode, placeholder: "0000000" %><br>
+  <%= f.label :address, "住所", class: "col-3" %>
+  <%= f.text_field :address, placeholder: "東京都渋⾕区代々⽊神園町0-0", size: "60" %><br>
+  <%= f.label :name , "宛名", class: "col-3"%>
+  <%= f.text_field :name, placeholder: "令和道子" %>
+<% end %>
