@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'homes/top'
   get 'homes/about'
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
     registrations: 'customers/registrations'
