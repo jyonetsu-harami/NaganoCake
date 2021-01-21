@@ -1,0 +1,18 @@
+<h4>商品編集</h4>
+
+<%= form_with model: [:admin, @product], local:true do |f| %>
+  <h4>画像</h4>
+  <%= f.attachment_field :image %>
+  <h4>商品名</h4>
+  <%= f.text_field :name %>
+  <h4>商品説明</h4>
+  <%= f.text_area :description %>
+  <h4>ジャンル</h4>
+  <%= f.collection_select :genre_id,@genres, :id, :name, :include_blank => '選択してください', required: true %>
+  <h4>税抜価格</h4>
+  <%= f.text_field :price %>
+  <h4>販売ステータス</h4>
+  <%= f.radio_button :sales_status, :true %> <%= f.label :sales_status, "販売中" %>
+  <%= f.radio_button :sales_status, :false %> <%= f.label :sales_status, "販売停止中" %>
+  <div><%= f.submit '変更を保存', class: 'btn-success btn-sm' %></div>
+<% end %>

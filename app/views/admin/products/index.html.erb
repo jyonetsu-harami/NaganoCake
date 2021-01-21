@@ -14,10 +14,16 @@
     <% @products.each do |product| %>
     <tr>
       <td><%= product.id %></td>
-      <td><%= product.name %></td>
+      <td><%= link_to product.name, admin_product_path(product) %></td>
       <td><%= product.price %></td>
-      <td><%= product.genre %></td>
-      <td><%= product.sales_status %></td>
+      <td><%= product.genre.name %></td>
+      <td>
+        <% if product.sales_status == true %>
+        <p class="text-success">販売中</p>
+        <% elsif product.sales_status == false %>
+        <p class="text-secondary">販売停止中</p>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
