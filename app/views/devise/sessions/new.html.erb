@@ -1,26 +1,35 @@
-<h2>Log in</h2>
-
-<%= form_with model: @user, url: customer_session_path, local: true do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
+<h4>ログイン</h4>
+<p>会員の方はこちらからログイン</p>
+<%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
+<table>
+    <tbody>
+      <tr class="form-group">
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :password, "パスワード" %></td>
+        <td><%= f.password_field :password, autocomplete: "current-password", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="form-group">
+        <td></td>
+        <td><%= f.submit "ログイン", class: "btn btn-primary" %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<p>会員登録がお済みでない方</p>
+<P><%= link_to "こちら", new_customer_registration_path %>　から新規登録を行なってください。</P>
+<!--<%= render "devise/shared/links" %>-->

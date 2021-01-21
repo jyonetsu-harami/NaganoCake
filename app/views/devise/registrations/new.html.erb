@@ -1,6 +1,6 @@
 <h4>新規会員登録</h4>
 <%= render "devise/shared/error_messages", resource: resource %>
-<%= form_with model: @user, url: customer_registration_path, local: true do |f| %>
+<%= form_with model: @customer, url: customer_registration_path, local: true do |f| %>
   <table>
     <tbody>
       <tr class="form-group">
@@ -12,8 +12,8 @@
       </tr>
       <tr class="form-group">
         <td>フリガナ</td>
-        <td><%= f.label :first_name_kana, "(セイ)" %></td>
-        <td><%= f.text_field :first_name_kana, placeholder: "レイワ", class: "form-control" %></td>
+        <td><%= f.label :last_name_kana, "(セイ)" %></td>
+        <td><%= f.text_field :last_name_kana, placeholder: "レイワ", class: "form-control" %></td>
         <td><%= f.label :first_name_kana, "(メイ)" %></td>
         <td><%= f.text_field :first_name_kana, placeholder: "ミチコ", class: "form-control" %></td>
       </tr>
@@ -41,7 +41,7 @@
       <tr class="form-group">
         <td><%= f.label :phone_number, "電話番号(ハイフンなし)" %></td>
         <td></td>
-        <td><%= f.text_field :phone_number, placeholder: "08012345678", class: "form-control" %></td>
+        <td><%= f.text_field :phone_number, placeholder: "00012345678", class: "form-control" %></td>
         <td></td>
         <td></td>
       </tr>
