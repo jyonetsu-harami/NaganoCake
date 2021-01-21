@@ -1,0 +1,73 @@
+<h4>新規会員登録</h4>
+<%= render "devise/shared/error_messages", resource: resource %>
+<%= form_with model: @user, url: customer_registration_path, local: true do |f| %>
+  <table>
+    <tbody>
+      <tr class="form-group">
+        <td>名前</td>
+        <td><%= f.label :last_name, "(姓)" %></td>
+        <td><%= f.text_field :last_name, autofocus: true, placeholder: "令和", class: "form-control" %></td>
+        <td><%= f.label :first_name, "(名)" %></td>
+        <td><%= f.text_field :first_name, placeholder: "道子", class: "form-control" %></td>
+      </tr>
+      <tr class="form-group">
+        <td>フリガナ</td>
+        <td><%= f.label :first_name_kana, "(セイ)" %></td>
+        <td><%= f.text_field :first_name_kana, placeholder: "レイワ", class: "form-control" %></td>
+        <td><%= f.label :first_name_kana, "(メイ)" %></td>
+        <td><%= f.text_field :first_name_kana, placeholder: "ミチコ", class: "form-control" %></td>
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td></td>
+        <td><%= f.email_field :email, autocomplete: "email", placeholder: "name@example.com", class: "form-control" %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :zipcode, "郵便番号(ハイフンなし)" %></td>
+        <td></td>
+        <td><%= f.text_field :zipcode, placeholder: "1638001", class: "form-control" %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :address, "住所" %></td>
+        <td></td>
+        <td colspan="3"><%= f.text_field :address, placeholder: "東京都新宿区西新宿２丁目８−１", class: "form-control" %></td>
+        <!--<td></td>-->
+        <!--<td></td>-->
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :phone_number, "電話番号(ハイフンなし)" %></td>
+        <td></td>
+        <td><%= f.text_field :phone_number, placeholder: "08012345678", class: "form-control" %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :password, "パスワード(6文字以上)" %></td>
+        <td></td>
+        <td><%= f.password_field :password, autocomplete: "new-password", class: "form-control" %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="form-group">
+        <td><%= f.label :password_confirmation, "パスワード(確認用)" %></td>
+        <td></td>
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= f.submit "新規登録", class: "btn btn-success btn-block" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+<h4>すでに登録済みの方</h4>
+<P><%= link_to "こちら", new_customer_session_path %>　からログインしてください。</P>
