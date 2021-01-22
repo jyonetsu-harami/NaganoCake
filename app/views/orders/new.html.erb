@@ -1,4 +1,4 @@
-<%= form_with model: @order, local: true do |f| %>
+<%= form_with model: @order, url: order_confirm_orders_path, local: true do |f| %>
   <h4>注文情報入力</h4>
   <div>
     <h5>支払方法</h5>

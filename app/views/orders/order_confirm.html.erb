@@ -49,17 +49,17 @@
 <div class="row">
   <h5 class="col-3">お届け先</h5>
   <div class="col-7">
-    <%= @shipping_address %><br>
+    <span>〒<%= @zipcode %> <%= @address %></span><br>
     <%= @name %>
   </div>
 </div>
 
-<%= form_with model: @order, local: true do |f| %>
+<%= form_with model: @order, url: orders_path, local: true do |f| %>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
   <%= f.hidden_field :total_price, value: @total_price %>
   <%= f.hidden_field :zipcode, value: @zipcode %>
-  <%= f.hidden_field :address, value: @shipping_address %>
+  <%= f.hidden_field :address, value: @address %>
   <%= f.hidden_field :name, value: @name %>
   <%= f.hidden_field :payment_method, value: @payment_method %>
-  <%= f.hidden_field :fixed, value: @fixed %>
   <%= f.submit "注文を確定する", class: "btn btn-success" %>
 <% end %>

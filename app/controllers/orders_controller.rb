@@ -5,41 +5,40 @@ class OrdersController < ApplicationController
   end
   
   def create
-    if params[:order][:fixed] == "1"
-      order = Order.new(order_params)
-      order.save
-      redirect_to order_success_order_path(@order.id)
-    else
-      @cart_items = current_customer.cart_items
-      @total_price = billing_amount(@cart_items)
-      @payment_method = params[:order][:payment_method]
-      @fixed = "fixed"
-      if params[:order][:shipping_method] == "1"
-        @shipping_address = current_customer.merge_zipcode_to_address
-        @name = current_customer.full_name
-        @zipcode = current_customer.zipcode
-      elsif params[:order][:shipping_method] == "2"
-        shipping_infomation = ShippingInformation.find(params[:order][:shipping_information])
-        @shipping_address = shipping_infomation.merge_zipcode_to_address
-        @name = shipping_infomation.name
-        @order = Order.new(
-          total_price: @total_price,
-          zipcode: shipping_infomation.zipcode,
-          address: shipping_infomation.address,
-          name: @name,
-          payment_method: @payment_method
-          )
-      elsif params[:order][:shipping_method] == "3"
-        @shipping_address = "新規配送先住所"#条件分岐を試したときの記述
-      end
+    order = Order.new(order_params)
+    if order.save
+      redirect_to order_items_path
     end
-      
-      
-    render :order_confirm
   end
   
   def order_confirm
-    
+    @order = Order.new
+    @cart_items = current_customer.cart_items
+    @total_price = billing_amount(@cart_items)
+    @payment_method = params[:order][:payment_method]
+    if params[:order][:shipping_method] == "1"
+      @zipcode = current_customer.zipcode
+      @address = current_customer.address
+      @name = current_customer.full_name
+    elsif params[:order][:shipping_method] == "2"
+      shipping_infomation = ShippingInformation.find(params[:order][:shipping_information])
+      @zipcode = shipping_infomation.zipcode
+      @address = shipping_infomation.address
+      @name = shipping_infomation.name
+    elsif params[:order][:shipping_method] == "3"
+      @zipcode = params[:order][:zipcode]
+      @address = params[:order][:address]
+      @name = params[:order][:name]
+      shipping_infomation = ShippingInformation.create(
+        customer_id: current_customer.id,
+        zipcode: @zipcode,
+        address: @address,
+        name: @name
+        )
+    end
+  end
+  
+  def order_success
   end
   
   def index
@@ -48,7 +47,7 @@ class OrdersController < ApplicationController
   
   private
   def order_params
-    params.require(:order).permit(:zipcode, :address, :name, :payment_method, :shipping_method, :fixed)
+    params.require(:order).permit(:customer_id, :zipcode, :address, :name, :payment_method, :shipping_method )
   end
   
   def billing_amount(cart_items)

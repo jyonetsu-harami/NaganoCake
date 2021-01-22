@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     end
   end
   resources :orders, only: [:new, :create, :index, :show] do
-    member do
+    resources :order_items, only: [:create]
+    collection do
       post :order_confirm
       get :order_success
     end
