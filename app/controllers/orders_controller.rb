@@ -2,30 +2,44 @@ class OrdersController < ApplicationController
   
   def new
     @order = Order.new
-  end  
+  end
   
   def create
-    @order = Order.new
-    @cart_items = current_customer.cart_items
-    # @total_price　ここで確定させて以下の条件分岐内で使用する。確認ページのビューでも使用する
-    if params[:order][:shipping_method] == "1"
-      # ここからorderインスタンスに情報を入れていく
-      @order.zipcode = current_customer.zipcode
-      @order.address = current_customer.address
-      # @order.name = フルネーム　よこさんがシェアしてくれた記事の方法で行ける
-      .
-      .
-      .
-    elsif params[:order][:shipping_method] == "2"
-      @shipping_address = "current_customer.sipping_informations、どれかの住所"#条件分岐を試したときの記述
-    elsif params[:order][:shipping_method] == "3"
-      @shipping_address = "新規配送先住所"#条件分岐を試したときの記述
+    if params[:order][:fixed] == "1"
+      order = Order.new(order_params)
+      order.save
+      redirect_to order_success_order_path(@order.id)
+    else
+      @cart_items = current_customer.cart_items
+      @total_price = billing_amount(@cart_items)
+      @payment_method = params[:order][:payment_method]
+      @fixed = "fixed"
+      if params[:order][:shipping_method] == "1"
+        @shipping_address = current_customer.merge_zipcode_to_address
+        @name = current_customer.full_name
+        @zipcode = current_customer.zipcode
+      elsif params[:order][:shipping_method] == "2"
+        shipping_infomation = ShippingInformation.find(params[:order][:shipping_information])
+        @shipping_address = shipping_infomation.merge_zipcode_to_address
+        @name = shipping_infomation.name
+        @order = Order.new(
+          total_price: @total_price,
+          zipcode: shipping_infomation.zipcode,
+          address: shipping_infomation.address,
+          name: @name,
+          payment_method: @payment_method
+          )
+      elsif params[:order][:shipping_method] == "3"
+        @shipping_address = "新規配送先住所"#条件分岐を試したときの記述
+      end
     end
+      
+      
     render :order_confirm
   end
   
   def order_confirm
-    # renderでcreateアクションのインスタンス変数を引き継がせて表示させる
+    
   end
   
   def index
@@ -34,6 +48,17 @@ class OrdersController < ApplicationController
   
   private
   def order_params
-    params.require(:order).permit(:zipcode, :address, :name, :payment_method, :shipping_method)
+    params.require(:order).permit(:zipcode, :address, :name, :payment_method, :shipping_method, :fixed)
+  end
+  
+  def billing_amount(cart_items)
+    array = []
+    cart_items.each do |cart_item|
+      array << cart_item.product.price*cart_item.amount
+    end
+    cart_amount = array.sum
+    cart_amount_add_tax = cart_amount * 1.1
+    cart_amount_add_tax += 800
+    cart_amount_add_tax.floor
   end
 end

@@ -3,7 +3,7 @@ class CartItemsController < ApplicationController
   
   def create
     if customer_signed_in?
-      cart_item = CartItem.find_by(customer_id: current_customer.id, product_id: 1)
+      cart_item = CartItem.find_by(customer_id: current_customer.id, product_id: params[:cart_item][:product_id] )
       if cart_item.nil?
         cart_item = CartItem.new(cart_item_params)
         cart_item.customer_id = current_customer.id
