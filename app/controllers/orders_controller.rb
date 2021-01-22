@@ -5,25 +5,27 @@ class OrdersController < ApplicationController
   end  
   
   def create
-    address_attribute = params[:sipping_address]      
     @order = Order.new
-    if address_attribute == 1
+    @cart_items = current_customer.cart_items
+    # @total_price　ここで確定させて以下の条件分岐内で使用する。確認ページのビューでも使用する
+    if params[:order][:shipping_method] == "1"
+      # ここからorderインスタンスに情報を入れていく
       @order.zipcode = current_customer.zipcode
       @order.address = current_customer.address
-      @order.name = current_customer.last_name +current_customer.first_name
-    elsif address_attribute == 2
-      
-    elsif address_attribute == 3
-      
-    end
-      
+      # @order.name = フルネーム　よこさんがシェアしてくれた記事の方法で行ける
+      .
+      .
+      .
+    elsif params[:order][:shipping_method] == "2"
+      @shipping_address = "current_customer.sipping_informations、どれかの住所"#条件分岐を試したときの記述
+    elsif params[:order][:shipping_method] == "3"
+      @shipping_address = "新規配送先住所"#条件分岐を試したときの記述
     end
     render :order_confirm
   end
   
   def order_confirm
-    @order = Order.new(order_params)
-    @shipping_address = params([:shipping_address])
+    # renderでcreateアクションのインスタンス変数を引き継がせて表示させる
   end
   
   def index
@@ -32,6 +34,6 @@ class OrdersController < ApplicationController
   
   private
   def order_params
-    params.require(:order).permit(:zipcode, :address, :name, :payment_method, :shipping_address)
+    params.require(:order).permit(:zipcode, :address, :name, :payment_method, :shipping_method)
   end
 end

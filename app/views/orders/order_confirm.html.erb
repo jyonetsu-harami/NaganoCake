@@ -1,1 +1,43 @@
 <h4>注⽂情報確認</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr class="table-active">
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+      <tr>
+        <th>
+          <%= link_to product_path(cart_item.product_id) do %>
+            <%= attachment_image_tag cart_item.product, :image, :fill, 50, 50 %>
+            <%= cart_item.product.name %>
+          <% end %>
+        </th>
+        <th><%= add_tax(cart_item.product.price) %></th>
+        <th><%= cart_item.amount %></th>
+        <th><%= add_tax(cart_item.product.price*cart_item.amount) %></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <th class="table-active">送料</th>
+      <td>800</td>
+    </tr>
+    <tr>
+      <th class="table-active">商品合計</th>
+      <td><%= add_tax(total_amount(@cart_items)) %></td>
+    </tr>
+    <tr>
+      <th class="table-active">請求金額</th>
+      <td>@total_price.to_s(:delimited)</td>
+    </tr>
+  </tbody>
+</table>
