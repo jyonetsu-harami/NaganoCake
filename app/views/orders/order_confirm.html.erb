@@ -1,1 +1,33 @@
 <h4>注⽂情報確認</h4>
+
+  <h5>支払方法</h5>
+  
+  <h5>お届け先</h5>
+  <!--ご自身の住所-->
+  <% if @shipping_attribute == "1" %>
+    <%= @order.zipcode %><%= @order.address %><br>
+    <%= @order.name %>
+
+  <!--登録済住所-->
+  <% elsif @shipping_attribute == "2" %>
+    <!--<= @shipping_info %>-->
+    <!--<= @shipping_info.zipcode %><= @shipping_info.address %><br>-->
+    <!--<= @shipping_info.name %>-->
+
+  <!--新しいお届け先-->
+  <% elsif @shipping_attribute == "3" %>
+    <!--<= @new_address %>-->
+    <!--<= @new_address.zipcode %>-->
+    <!--<= @new_address.address %>-->
+    <!--<= @new_address.name %>-->
+  <% end %>
+  
+<!--保存(購入)する内容-->
+<%= form_with model: @order, local: true do |f| %>
+  <!--<= f.hidden_field :peyment_method %>-->
+  <!--<= f.hidden_field :zipcode %>-->
+  <!--<= f.hidden_field :address %>-->
+  <!--<= f.hidden_field :name %>-->
+  <!--<= f.hidden_field : %>-->
+  <%= f.submit "購入を確定する", class: "btn btn-primary" %>
+<% end %>  

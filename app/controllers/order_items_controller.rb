@@ -1,4 +1,2 @@
 class OrderItemsController < ApplicationController
-  
-  
 end
