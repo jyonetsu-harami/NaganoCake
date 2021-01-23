@@ -1,37 +1,77 @@
 class OrdersController < ApplicationController
-  
+
   def new
     @order = Order.new
-  end  
-  
+    @current_customer = current_customer
+  end
+
   def create
-    address_attribute = params[:sipping_address]      
-    @order = Order.new
-    if address_attribute == 1
-      @order.zipcode = current_customer.zipcode
-      @order.address = current_customer.address
-      @order.name = current_customer.last_name +current_customer.first_name
-    elsif address_attribute == 2
-      
-    elsif address_attribute == 3
-      
-    end
-      
-    end
-    render :order_confirm
+    order = Order.new(order_params)
+     order.save
+      @cart_items = current_customer.cart_items.all
+        @cart_items.each do |cart_item|
+          @order_items = OrderItem.new
+          @order_items.order_id = order.id
+          @order_items.product_id = cart_item.product_id
+          @order_items.amount = cart_item.amount
+          @order_items.tax_in_price = cart_item.product.price*1.1
+        end
+    current_customer.cart_items.destroy_all
+    redirect_to order_success_orders_path
   end
-  
+
   def order_confirm
-    @order = Order.new(order_params)
-    @shipping_address = params([:shipping_address])
+    @order = Order.new
+    @cart_items = current_customer.cart_items
+    @cart_items_total_price = cart_items_total_price
+    @total_price = total_price
+    @payment_method = params[:order][:payment_method]
+
+    if params[:order][:shipping_address] == '1'
+      @zipcode = current_customer.zipcode
+      @address = current_customer.address
+      @name = current_customer.last_name + current_customer.first_name
+      render :order_confirm
+    #登録済の住所
+    elsif params[:order][:shipping_address] == '2'
+       render :order_confirm
+    #新しいお届け先
+    elsif params[:order][:shipping_address] == '3'
+      render :order_confirm
+    else render :"products/index"
+    end
+
   end
-  
+
+  def order_success
+  end
+
   def index
     @orders = Order.all
-  end  
-  
-  private
-  def order_params
-    params.require(:order).permit(:zipcode, :address, :name, :payment_method, :shipping_address)
+  end
+
+  def cart_items_total_price
+    cart_items = current_customer.cart_items
+    array = []
+    cart_items.each do |cart_item|
+      array << cart_item.product.price*cart_item.amount
+    end
+    array.sum
+  end
+
+  def total_price
+    postage = @order.postage
+    total_price = cart_items_total_price*1.1 + postage
   end
 end
+
+  private
+  def order_params
+    params.require(:order).permit(:zipcode, :address, :name, :payment_method,
+                                  :shipping_address, :customer_id, :total_price
+                                  )
+  end
+
+  def order_item_params
+    params.require(:order_item).permit(:order_id, :product_id, :amount, :tax_in_price)
+  end
