@@ -1,9 +1,11 @@
-<%= form_with model: @order, local: true do |f| %>
+<%= form_with model: @order, url: order_confirm_orders_path, local: true do |f| %>
   <h4>注文情報入力</h4>
+  
 <!--支払方法-->
   <h5>支払方法</h5>
-  <%= f.radio_button :peyment_method, :クレジットカード, checked: true %> <%= f.label :payment_method, "クレジットカード" %><br>
-  <%= f.radio_button :peyment_method, :銀行振り込み %> <%= f.label :payment_method, "銀行振り込み" %>
+  <%= f.radio_button :payment_method, :クレジットカード, checked: true %> <%= f.label :payment_method, "クレジットカード" %><br>
+  <%= f.radio_button :payment_method, :銀行振り込み %> <%= f.label :payment_method, "銀行振り込み" %>
+  
 <!--お届け先-->
   <h5>お届け先</h5>
   <!--ご自身の住所-->
@@ -18,7 +20,6 @@
   <%= radio_button_tag("shipping_attribute", "2") %>
   <%= label_tag("shipping_attribute_2", '登録済住所から選択') %><br>
   <%= f.collection_select(:shipping_information, current_customer.shipping_informations, :id, :address_all) %><br>
-  <!--<= f.collection_select(:address, ShippingInformation.all, :id, :address_all) %><br>-->
 
   <!--新しいお届け先-->
   <%= radio_button_tag("shipping_attribute", "3") %>

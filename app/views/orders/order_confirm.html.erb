@@ -1,17 +1,64 @@
 <h4>注⽂情報確認</h4>
+<div class="d-flex justify-content-around">
+<!--テーブル左側-->
+  <table class="table table-bordered">
+    <thead class="table-active">
+      <tr>
+        <td><p>商品名</p></td>
+        <td><p>単価（税込み）</p></td>
+        <td><p>数量</p></td>
+        <td><p>小計</p></td>
+      </tr>
+    </thead>
+    <% @cart_items.each do |cart_item|%>
+      <tbody>
+        <td>
+          <%= attachment_image_tag cart_item.product, :image, :fill, 50, 50 %>
+          <%= cart_item.product.name %>
+        </td>
+        <td><%= cart_item.product.price %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= add_tax(cart_item.product.price*cart_item.amount) %></td>
+      </tbody>
+    <% end %>  
+  </table>
+<!--テーブル右側-->
+  <table class="table table-bordered">
+    <tr>
+      <td class="table-active"><p>送料</p></td>
+      <td><p>800</p></td>
+    </tr>
+    <tr>
+      <td class="table-active"><p>商品合計</p></td>
+      <td><%= add_tax(@cart_item_price) %></td>
+    </tr>
+    <tr>
+      <td class="table-active"><p>請求金額</p></td>
+      <td><%= @total_price.to_s(:delimited) %></td>
+    </tr>
+  </table>
+</div>
 
-  <h5>支払方法</h5>
-  
-  <h5>お届け先</h5>
-  <%= @order.zipcode %>
-  <%= @order.address %><br>
-  <%= @order.name %>
+<!--支払方法-->
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="p-2 bd-highlight"><h5>支払方法</h5></div>
+  <div class="p-2 bd-highlight"><%= @payment_method %></div>
+</div>
+<!--お届け先-->
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="p-2 bd-highlight"><h5>お届け先</h5></div>
+  <div class="p-2 bd-highlight"><%= "〒" + @zipcode %></div>
+  <div class="p-2 bd-highlight"><%= @address %></div><br>
+  <div class="p-2 bd-highlight"><%= @name %></div>
+</div>  
 
 <!--保存(購入)する内容-->
-<%= form_with model: @order, local: true do |f| %>
-  <!--<= f.hidden_field :peyment_method %>-->
-  <%= f.hidden_field :zipcode, value: @order.zipcode %>
-  <%= f.hidden_field :address, value: @order.address %>
-  <%= f.hidden_field :name, value: @order.name %>
+<%= form_with model: @order, url: orders_path, local: true do |f| %><!--orderコントローラのcreateアクションへ飛ばす-->
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
+  <%= f.hidden_field :peyment_method , value: @payment_method %>
+  <%= f.hidden_field :zipcode, value: @zipcode %>
+  <%= f.hidden_field :address, value: @address %>
+  <%= f.hidden_field :name, value: @name %>
+  <%= f.hidden_field :total_price, value: @cart_item_price %>
   <%= f.submit "購入を確定する", class: "btn btn-primary" %>
 <% end %>  
