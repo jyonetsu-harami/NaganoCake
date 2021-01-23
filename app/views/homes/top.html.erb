@@ -1,2 +1,49 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="container homes-top-wrapper">
+  <div class="row">
+    <div class="col-xs-2">
+    </div>
+    <div class="homes-top-image col-xs-8 col-xs-offset-1">
+      <div class="homes-top-text col-xs-10 col-xs-offset-1">
+        <p>
+          ようこそ、ながのCAKEへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <%# 後ほど実装、Each文とリンク %>
+    <%# リンク先は商品詳細ページ item_path(@item.id) %>
+<div class="col-xs-offset-4 homes-top-under-menu-title">
+  <h2>オススメ商品</h2>
+</div>
+<div class="homes-top-under-menu col-xs-8 col-xs-offset-3">
+  <% @products.each do |product| %>
+    <div class="homes-top-box">
+      <table>
+        <thead>
+          <tr>
+            <td class="homes-top-under-image">
+
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="homes-top-under-text">
+            <td class="homes-name-wrap"><%= product.name %></td>
+          </tr>
+          <tr class="homes-top-under-text">
+            <td>￥<%= product.price %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+<div class="col-xs-1 col-xs-offset-10">
+    <p><%= link_to 'もっと見る  >', products_path %></p>
+</div>
+

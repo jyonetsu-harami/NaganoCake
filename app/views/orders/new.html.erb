@@ -1,0 +1,36 @@
+<%= form_with model: @order, local: true do |f| %>
+  <h4>注文情報入力</h4>
+<!--支払方法-->
+  <h5>支払方法</h5>
+  <%= f.radio_button :peyment_method, :クレジットカード, checked: true %> <%= f.label :payment_method, "クレジットカード" %><br>
+  <%= f.radio_button :peyment_method, :銀行振り込み %> <%= f.label :payment_method, "銀行振込" %>
+  <br>
+<!--お届け先-->
+  <h5>お届け先</h5>
+  <!--ご自身の住所-->
+  <%= radio_button_tag("shipping_attribute", "1",checked: true) %>
+  <%= label_tag("shipping_attribute_1", 'ご自身の住所') %><br>
+  <%= current_customer.zipcode %>
+  <%= current_customer.address %><br>
+  <%= current_customer.last_name %>
+  <%= current_customer.first_name %><br>
+ <br>
+  <!--登録済住所から選択-->
+  <%= radio_button_tag("shipping_attribute", "2") %>
+  <%= label_tag("shipping_attribute_2", '登録済住所から選択') %><br>
+  <%= f.collection_select(:shipping_information, current_customer.shipping_informations, :id, :address_all) %><br>
+  <!--<= f.collection_select(:address, ShippingInformation.all, :id, :address_all) %><br>-->
+<br>
+  <!--新しいお届け先-->
+  <%= radio_button_tag("shipping_attribute", "3") %>
+  <%= label_tag("shipping_attribute_3", '新しいお届け先') %><br>
+  <%= f.label :zipcode, "郵便番号（ハイフンなし）", class: "col-3"%>
+  <%= f.text_field :zipcode, placeholder: "0000000" %><br>
+  <%= f.label :address, "住所", class: "col-3" %>
+  <%= f.text_field :address, placeholder: "東京都渋⾕区代々⽊神園町0-0", size: "60" %><br>
+  <%= f.label :name , "宛名", class: "col-3"%>
+  <%= f.text_field :name, placeholder: "令和道子" %><br>
+
+  <!--送信ボタンボタン-->
+  <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+<% end %>

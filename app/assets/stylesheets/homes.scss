@@ -1,3 +1,37 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.homes-top-box {
+  width: 23%;
+  flex: wrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.homes-top-wrapper {
+  margin-top: 40px;
+}
+
+.homes-top-image {
+  border: 1px solid #000;
+  height: 400px;
+  background: image-url('top-img.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 7px;
+  opacity: 0.7;
+}
+
+.homes-top-text {
+  height: 200px;
+  margin-top: 100px;
+  font-size: 25px;
+  font-weight: bold;
+  color: gray;
+  font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  padding: 1rem 2rem;
+  border: 3px solid #000;
+  border-radius: 8px;
+}
