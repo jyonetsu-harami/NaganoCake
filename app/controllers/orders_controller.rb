@@ -7,7 +7,18 @@ class OrdersController < ApplicationController
   def create
     order = Order.new(order_params)
     if order.save
-      redirect_to order_items_path
+      cart_items = current_customer.cart_items
+      cart_items.each do |cart_item|
+        tax_in_price = cart_item.product.price * 1.1
+        OrderItem.create(
+          order_id: order.id,
+          product_id: cart_item.product_id,
+          amount: cart_item.amount,
+          tax_in_price: tax_in_price.floor
+          )
+      end
+      current_customer.cart_items.destroy_all
+      redirect_to  order_success_orders_path
     end
   end
   
@@ -47,7 +58,7 @@ class OrdersController < ApplicationController
   
   private
   def order_params
-    params.require(:order).permit(:customer_id, :zipcode, :address, :name, :payment_method, :shipping_method )
+    params.require(:order).permit(:customer_id, :zipcode, :address, :name, :payment_method, :shipping_method, :total_price )
   end
   
   def billing_amount(cart_items)
