@@ -53,8 +53,8 @@ class OrdersController < ApplicationController
   end
   
   def index
-    @orders = Order.all
-  end  
+    @orders = current_customer.orders
+  end
   
   private
   def order_params
