@@ -43,8 +43,8 @@
         <tr>
           <th class="table-active">合計金額</th>
           <th>
-            <!--total_amountメソッド記載場所 app/helpers/cart_items_helper.rb-->
-            <%= add_tax(total_amount(@cart_items)) %>
+            <!--cart_amountメソッド記載場所 app/helpers/cart_items_helper.rb-->
+            <%= add_tax(cart_amount(@cart_items)) %>
           </th>
         </tr>
       </tbody>

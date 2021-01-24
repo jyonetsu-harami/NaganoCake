@@ -16,10 +16,9 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
       redirect_to admin_customer_path(@customer.id)
-    else  
-      flash[:info] = "既に登録されています"
-      render :edit
-    end
+    else 
+      render :new
+    end  
   end
   
   private

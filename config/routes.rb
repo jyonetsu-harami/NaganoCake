@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   get 'homes/top'
   get 'homes/about'
-  devise_for :admins
-  devise_for :customers
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
+  devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations'
+  }
 
   root 'homes#top'
   get 'about' => 'homes#about'
@@ -24,12 +28,13 @@ Rails.application.routes.draw do
     end
   end
   resources :orders, only: [:new, :create, :index, :show] do
-    member do
+    resources :order_items, only: [:create]
+    collection do
       post :order_confirm
       get :order_success
     end
   end
-  resources :customers, only: [:show, :edit, :update] do
+  resource :customers, only: [:show, :edit, :update] do
     member do
       get :unsubscribe
       patch :withdraw
