@@ -35,14 +35,28 @@ class OrdersController < ApplicationController
       render :order_confirm
     #登録済の住所
     elsif params[:order][:shipping_address] == '2'
+      shipping_infomation = ShippingInformation.find(params[:order][:shipping_information])
+      @zipcode = shipping_infomation.zipcode
+      @address = shipping_infomation.address
+      @name = shipping_infomation.name
        render :order_confirm
     #新しいお届け先
     elsif params[:order][:shipping_address] == '3'
+      @zipcode = params[:order][:zipcode]
+      @address = params[:order][:address]
+      @name = params[:order][:name]
+      shipping_infomation = ShippingInformation.create(
+        customer_id: current_customer.id,
+        zipcode: @zipcode,
+        address: @address,
+        name: @name
+        )
       render :order_confirm
-    else render :"products/index"
+    else
+    render :"products/index"
     end
-
   end
+
 
   def order_success
   end
