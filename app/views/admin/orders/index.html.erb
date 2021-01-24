@@ -18,7 +18,7 @@
           <% end %>
         </th>
         <th><%= Customer.find(order.customer_id).full_name %></th>
-        <th><%= order_quantity(order) %></th>
+        <th><%= order.order_items.sum(:amount) %></th>
         <th><%= order.status %></th>
       </tr>
     <% end %>
