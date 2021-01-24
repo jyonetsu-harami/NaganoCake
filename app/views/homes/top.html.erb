@@ -1,2 +1,50 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="container homes-top-wrapper">
+  <div class="card-body">
+    <div class="homes-top-image col-9">
+      <div class="homes-top-text col-12">
+        <p>
+          ようこそ、ながのCAKEへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <%# Each文とリンク %>
+
+<div class="homes-top-under-menu-title">
+  <h2>新着商品</h2>
+</div>
+<div class="homes-top-under-menu ">
+  <% @random.each do |product| %>
+    <div class="homes-top-box">
+      <table>
+        <thead>
+          <tr>
+            <td class="homes-top-under-image">
+
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+           <tr>
+            <td class="homes-name-wrap"><%= product.image.id %></td>
+          </tr>
+          <tr>
+            <td class="homes-name-wrap"><%= product.name %></td>
+          </tr>
+          <tr>
+            <td>￥<%= product.price %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  <% end %>
+<div class="col-xs-12 col-xs-offset-8">
+    <p class="more"><%= link_to '全ての商品を見る  >', products_path %></p>
+</div>
+
