@@ -57,6 +57,12 @@ class OrdersController < ApplicationController
     @orders = current_customer.orders
   end
   
+  def show
+    @order = Order.find(params[:id])
+    @order_item = @order.order_items
+    @product_total_price = @order.total_price-@order.postage #商品の合計
+  end
+  
   private
   def order_params
     params.require(:order).permit(:customer_id, :zipcode, :address, :name, :payment_method, :shipping_method, :total_price )
