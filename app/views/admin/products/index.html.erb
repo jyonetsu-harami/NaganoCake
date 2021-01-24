@@ -1,4 +1,9 @@
 <h4>商品一覧<h4>
+<div>
+  <%= link_to new_admin_product_path do %>
+    <i class="fas fa-plus-circle fa-lg fa-pull-right"></i>
+  <% end %>
+</div>
 
 <table class='table'>
   <thread>
@@ -28,6 +33,8 @@
     <% end %>
   </tbody>
 </table>
+
+
 
 <%= paginate @products %>
 <style>
