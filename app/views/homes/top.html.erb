@@ -13,13 +13,13 @@
   </div>
 </div>
 
-    <%# 後ほど実装、Each文とリンク %>
+    <%# Each文とリンク %>
 
 <div class="homes-top-under-menu-title">
-  <h2>オススメ商品</h2>
+  <h2>新着商品</h2>
 </div>
 <div class="homes-top-under-menu ">
-  <% @products.each do |product| %>
+  <% @random.each do |product| %>
     <div class="homes-top-box">
       <table>
         <thead>
@@ -42,8 +42,9 @@
         </tbody>
       </table>
     </div>
+    </div>
   <% end %>
-<div class="col-xs-1 col-xs-offset-8">
-    <p class="more"><%= link_to '全ての商品を  >', products_path %></p>
+<div class="col-xs-12 col-xs-offset-8">
+    <p class="more"><%= link_to '全ての商品を見る  >', products_path %></p>
 </div>
 
