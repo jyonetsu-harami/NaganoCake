@@ -41,4 +41,5 @@
 </table>
 
 <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %>
-<%= link_to "注文履歴一覧をみる", admin_orders_path, class: "btn btn-primary" %>
+<!--注文一覧ページでこのページの顧客注文一覧のみを表示させる条件分岐のためパラメータにcustomer_idを付与-->
+<%= link_to "注文履歴一覧をみる", admin_orders_path(customer_id: @customer.id), class: "btn btn-primary" %>

@@ -1,7 +1,12 @@
 class Admin::OrdersController < ApplicationController
   
   def index
-    @orders = Order.page(params[:page]).reverse_order
+  # params[:customer_id]に値が入っていたら@ordersにその顧客の注文一覧を代入する
+    if params[:customer_id].present?
+      @orders = Customer.find(params[:customer_id]).orders.page(params[:page]).reverse_order
+    else
+      @orders = Order.page(params[:page]).reverse_order
+    end
   end
   
   def show
@@ -21,6 +26,6 @@ class Admin::OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:order).permit(:status)
+    params.require(:order).permit(:status, )
   end
 end
