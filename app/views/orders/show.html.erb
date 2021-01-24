@@ -1,0 +1,64 @@
+<h4>注文履歴詳細</h4>
+<div class="row">
+  <div class="col-8">
+    <h5>注文情報</h5>
+    <table class="table table-bordered">
+      <tr>
+        <td class="table-active"><p>注文日</p></td>
+        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      </tr>
+      <tr>
+        <td class="table-active"><p>配送先</p></td>
+        <td>
+          <span>〒</span><%= @order.zipcode %><br>
+          </%></%><%= @order.address %><br>
+          <%= @order.name  %>
+        </td>
+      </tr>
+      <tr>
+        <td class="table-active"><p>支払方法</p></td>
+        <td><%= @order.payment_method %></td>
+      </tr>
+      <tr>
+        <td class="table-active"><p>ステータス</p></td>
+        <td><%= @order.status %></td>
+      </tr>
+    </table>
+  </div>
+    <div class="col-4">
+    <h5>請求情報</h5>
+    <table class="table table-bordered">
+      <tr>
+        <td class="table-active"><p>商品合計</p></td>
+        <td><%= @product_total_price.to_s(:delimited) %></td>
+      </tr>
+      <tr>
+        <td class="table-active"><p>配送料</p></t>
+        <td><%= @order.postage %></td>
+      </tr>
+      <tr>
+        <th class="table-active"><p>請求金額</p></th>
+        <td><%= @order.total_price.to_s(:delimited) %></td>
+      </tr>
+      <tr>
+    </table>
+  </div>  
+</div>
+<h5><p>注文内容</p></h5>
+<table class="table table-bordered">
+  <tr class="table-active">
+    <td><p>商品</p></td>
+    <td><p>単価（税込み）</p></td>
+    <td><p>個数</p></td>
+    <td><p>小計</p></td>
+  </tr>
+  <% @order_item.each do |order_item| %>
+    <tr>
+      <td><%= order_item.product.name %></td>
+      <td><%= order_item.tax_in_price %></td>
+      <td><%= order_item.amount %></td>
+      <td><%= add_tax(order_item.product.price*order_item.amount) %></td>
+    </tr>
+  <% end%>  
+</table>
+<%= link_to "戻る", orders_path, class: "btn btn-primary" %>
