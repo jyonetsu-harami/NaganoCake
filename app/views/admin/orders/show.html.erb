@@ -1,0 +1,88 @@
+<h4 class="mt-4">注文履歴詳細</h4>
+<div class="row">
+  <%= form_with model: [:admin, @order], local: true do |f| %>
+    <table>
+      <tbody>
+        <tr height="40">
+          <th>購入者</td>
+          <td><%= link_to @customer.full_name, admin_customer_path(@customer.id) %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr height="40">
+          <th>注文日</td>
+          <td><%= @order.created_at.strftime( '%Y/%m/%d' )%></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr height="40">
+          <th>発送先</td>
+          <td colspan="3">
+            〒<%= @order.zipcode %> <%= @order.address %><br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr height="40">
+          <th>支払い方法</td>
+          <td><%= @order.payment_method %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr height="40">
+          <th>注文ステータス　</td>
+              <!--f.selectでenumの項目を選択肢として表示、デフォルト値はorder_item.making_status-->
+              <!--OrderItem.makin_statusesでOrderモデルで規定したenum status: の値をハッシュで取得-->
+              <!--.keysメソッドでハッシュ内のkeyのみを配列化 >["入金待ち", "入金確認", "制作中", "発送準備中", "発送済み"]-->
+          <td><%= f.select :status, Order.statuses.keys, selected: @order.status %></td>
+          <td><%= f.submit "更新", class: "btn btn-success btn-sm" %></td>
+          <td></td>
+        </tr>    
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-8 px-0">
+    <table class="table table-bordered mb-0">
+      <thead>
+        <tr class="table-active">
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.product.name %></th>
+            <th><%= order_item.tax_in_price.to_s(:delimited) %></th>
+            <th><%= order_item.amount %></th>
+            <th><%= (order_item.tax_in_price * order_item.amount).to_s(:delimited) %></th>
+            <%= form_with model: order_item, url: admin_order_item_path(order_item.id), local: true do |f| %>
+              <th><%= f.select :making_status, OrderItem.making_statuses.keys, selected: order_item.making_status %></th>
+              <th><%= f.submit "更新", class: "btn btn-primary btn-sm" %></th>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-3 mt-auto ml-auto">
+    <div class="row">
+      <div>
+        <p class="font-weight-bold">商品合計</p>
+        <p class="font-weight-bold">送料</p>
+        <p class="font-weight-bold mb-0">請求金額合計</p>
+      </div>
+      <div class="text-right ml-3">
+        <p><%= @order_items.sum(:tax_in_price).to_s(:delimited) %>円</p>
+        <p><%= @order.postage %>円</p>
+        <p class="font-weight-bold mb-0"><%= @order.total_price.to_s(:delimited) %>円</p>
+      </div>
+    </div>
+  </div>
+</div>
