@@ -31,7 +31,7 @@ class ShippingInformationsController < ApplicationController
 
   private
     def shipping_information_params
-      params.permit(:customer_id ,:zipcode, :address, :name)
+      params.require(:shipping_information).permit(:customer_id ,:zipcode, :address, :name)
     end
 
 end
