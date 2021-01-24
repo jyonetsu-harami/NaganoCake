@@ -3,8 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .homes-top-box {
-  width: 23%;
-  flex: wrap;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -16,22 +14,52 @@
 
 .homes-top-image {
   border: 1px solid #000;
+  margin: 0 auto;
   height: 400px;
   background: image-url('top-img.jpg');
   background-size: cover;
   background-position: center;
-  border-radius: 7px;
-  opacity: 0.7;
+  border-radius: 7%;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .homes-top-text {
   height: 200px;
   margin-top: 100px;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: bold;
-  color: gray;
+  color: black;
   font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
   padding: 1rem 2rem;
-  border: 3px solid #000;
+  border: 2px solid #000;
   border-radius: 8px;
+  background: rgba(255,255,255,0.5);
+}
+
+.about-top-box {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.about-top-wrapper {
+  margin-top: 40px;
+}
+
+.about-top {
+  font-size: 60px;
+  text-align: center;
+}
+
+.about-nagano-cake-text {
+  margin-top: 100px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 auto;
+  color: black;
+  font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  padding: 1rem 2rem;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: rgba(255,255,255,110);
 }
