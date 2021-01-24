@@ -1,6 +1,6 @@
 <!--配送先登録、一覧-->
 
-<%= form_with model:@customer, url:'/shipping_informations', local:true do |f| %>
+<%= form_with model:@shipping_information, url:'/shipping_informations', local:true do |f| %>
 <div class="container">
   <h4 class="col-xs-8 col-xs-offset-2">配送先登録／一覧</h4>
 
@@ -30,8 +30,10 @@
     </table>
   </div>
   <% end %>
+  <br>
+  <br>
 
-     <table class="table table-bordered">
+     <table class="table table-bordered table-striped">
       <tr class="active">
         <th>郵便番号</th>
         <th>住所</th>
@@ -44,8 +46,8 @@
           <td><%= shipping_information.address %></td>
           <td><%= shipping_information.name %></td>
           <td>
-            <%= link_to "編集する",edit_shipping_information_path(shipping_information.id), class: "btn-sm btn btn-success" %>
-            <%= link_to "削除する",shipping_information_path(shipping_information.id) , method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+          <%= link_to "編集する",edit_shipping_information_path(shipping_information.id), class: "btn btn btn-success" %>
+          <%= link_to "削除する",shipping_information_path(shipping_information.id) , method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
           </td>
         </tr>
       <% end %>
