@@ -6,15 +6,16 @@ class OrdersController < ApplicationController
   end
 
   def create
-    order = Order.new(order_params)
-     order.save
+    @order = Order.new(order_params)
+     @order.save
       @cart_items = current_customer.cart_items.all
         @cart_items.each do |cart_item|
-          @order_items = OrderItem.new
-          @order_items.order_id = order.id
+          @order_items = @order.order_items.new
+          @order_items.order_id = @order.id
           @order_items.product_id = cart_item.product_id
           @order_items.amount = cart_item.amount
           @order_items.tax_in_price = cart_item.product.price*1.1
+          @order_items.save
         end
     current_customer.cart_items.destroy_all
     redirect_to order_success_orders_path
