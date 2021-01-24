@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       get :order_success
     end
   end
-  resources :customers, only: [:show, :edit, :update] do
+  resource :customers, only: [:show, :edit, :update] do
     member do
       get :unsubscribe
       patch :withdraw
