@@ -1,7 +1,11 @@
-<>ジャンル編集</h4>
+<h4>ジャンル編集</h4>
 
 <%= form_with model: [:admin, @genre], local: true do |f| %>
   <h4>ジャンル名</h4>
   <%= f.text_field :name %>
-  <%= f.submit '変更を保存' %>
+  <%= f.radio_button :is_active, "true", checked: true %>
+      <span>有効</span>
+  <%= f.radio_button :is_active, "false" %>
+      <span>無効</span>
+  <%= f.submit '変更を保存', class: "btn btn-success" %>
 <% end %>

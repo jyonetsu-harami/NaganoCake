@@ -1,3 +1,83 @@
-// Place all the styles related to the homes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.homes-top-box {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.homes-top-wrapper {
+  margin-top: 40px;
+}
+
+.homes-top-image {
+  border: 1px solid #000;
+  margin: 0 auto;
+  height: 430px;
+  background: image-url('top-img.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #333;
+  border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 10px 10px 15px -10px;
+}
+
+.homes-top-text {
+  height: 200px;
+  margin-top: 110px;
+  font-size: 21px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  padding: 1rem 2rem;
+  border: 2px solid #333;
+  border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
+  background: rgba(255,255,255,0.9);
+  padding-top: 35px;
+}
+
+.homes-top-under-menu-title {
+  margin-top: 15px;
+}
+
+.homes-top-under-menu {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.about-top-wrapper {
+  margin-top: 40px;
+}
+
+.about-top {
+  font-size: 70px;
+  text-align: center;
+}
+
+.about-nagano-cake-text {
+  margin-top: 100px;
+　font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  margin: 0 auto;
+  color: black;
+  padding: 1rem 2rem;
+  border: 2px solid #333;
+  border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
+  background: rgba(255,255,255,110);
+  text-align: center;
+}
+
+.about-image {
+  border: 1px solid #000;
+  margin: 40px auto;
+  height: 370px;
+  background: image-url('about.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 7%;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 10px 10px 15px -10px;
+}
