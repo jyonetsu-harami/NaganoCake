@@ -36,3 +36,18 @@ Customer.create!(
   phone_number: '12345678900',
   is_active: 'true',
 )
+30.times do |n|
+  gimei = Gimei.new
+  Customer.create!(
+    email: "n#{n + 1}@1",
+    password: 'aaaaaa',
+    last_name: gimei.last.kanji,
+    first_name: gimei.first.kanji,
+    last_name_kana: gimei.last.katakana,
+    first_name_kana: gimei.first.katakana,
+    zipcode: '1111111',
+    address: gimei.prefecture.romaji,
+    phone_number: '12345678900',
+    is_active: 'true',
+  )
+end
