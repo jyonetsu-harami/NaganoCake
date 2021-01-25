@@ -3,19 +3,21 @@ class CartItemsController < ApplicationController
   
   def create
     if customer_signed_in?
-      cart_item = CartItem.find_by(customer_id: current_customer.id, product_id: params[:cart_item][:product_id] )
-      if cart_item.nil?
-        cart_item = CartItem.new(cart_item_params)
-        cart_item.customer_id = current_customer.id
-        if cart_item.save
+      if params[:cart_item][:amount].present?
+        cart_item = CartItem.find_by(customer_id: current_customer.id, product_id: params[:cart_item][:product_id] )
+        if cart_item.blank?
+          cart_item = CartItem.new(cart_item_params)
+          cart_item.customer_id = current_customer.id
+          if cart_item.save
+            redirect_to cart_items_path
+          end
+        elsif cart_item.present?
+          cart_item.update(cart_item_params)
           redirect_to cart_items_path
-        else
-          flash[:info] = "数量を選択してください"
-          redirect_back fallback_location: root_path
         end
       else
-        cart_item = CartItem.update(cart_item_params)
-        redirect_to cart_items_path
+        flash[:info] = "数量を選択してください"
+        redirect_back fallback_location: root_path
       end
     else
       flash[:info] = "カートに商品を追加するには、会員登録とログインが必要です"
