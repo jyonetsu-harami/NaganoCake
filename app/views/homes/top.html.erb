@@ -14,40 +14,18 @@
 </div>
 
     <%# Each文とリンク %>
-
-<div class="homes-top-under-menu-title">
-  <h2>新着商品</h2>
-</div>
-<div class="homes-top-under-menu ">
-  <% @random.each do |product| %>
-    <div class="homes-top-box">
-      <table>
-        <thead>
-          <tr>
-            <td class="homes-top-under-image">
-
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-           <tr>
-            <td class="homes-name-wrap">
-              <%= link_to product_path(product) do %>
-                <%= attachment_image_tag product, :image, :fill, 250, 150%>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td class="homes-name-wrap"><%= product.name %></td>
-          </tr>
-          <tr>
-            <td>￥<%= product.price %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<h2>新着商品</h2>    
+<div class="d-flex justify-content-around">
+  <% @random.each do |random| %>
+    <div>
+      <%= link_to product_path(random) do %>
+        <%= attachment_image_tag random, :image, :fill, 250, 150 %>
+      <% end %>
+      <p><%= random.name %></p>
+      <p>￥<%= random.price %></p>
     </div>
   <% end %>
+</div>
 <div class="col-xs-12 col-xs-offset-8">
     <p class="more"><%= link_to '全ての商品を見る  >', products_path %></p>
 </div>
