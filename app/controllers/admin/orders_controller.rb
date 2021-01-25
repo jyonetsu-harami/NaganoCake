@@ -17,8 +17,8 @@ class Admin::OrdersController < ApplicationController
   
   def update
     order = Order.find(params[:id])
-    if order.update(order_params) && params[:order][:status] = "入金確認"
-      order.order_items.update_(making_status: "制作待ち")
+    if order.update(order_params) && params[:order][:status] == "入金確認"
+      order.order_items.update(making_status: "制作待ち")
     end
     redirect_back fallback_location: root_path
   end
