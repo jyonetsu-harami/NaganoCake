@@ -31,7 +31,11 @@
         </thead>
         <tbody>
            <tr>
-            <td class="homes-name-wrap"><%= product.image.id %></td>
+            <td class="homes-name-wrap">
+              <%= link_to product_path(product) do %>
+                <%= attachment_image_tag product, :image, :fill, 250, 150%>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td class="homes-name-wrap"><%= product.name %></td>
