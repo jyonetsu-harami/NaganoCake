@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   root 'homes#top'
   get 'about' => 'homes#about'
-
+  get 'admin/top' => 'homes#admin'
+  
   namespace :admin do
     resources :products, only: [:index, :new, :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :update, :edit]
