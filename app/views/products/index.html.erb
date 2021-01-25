@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col-12">
               <p class="card-title"><%= product.name %></p>
-              <p class="card-text"><%= product.price %>円</p>
+              <p class="card-text"><%= add_tax(product.price) %>円</p>
             </div>
           </div>
         </div>
