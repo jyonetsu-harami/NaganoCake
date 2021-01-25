@@ -17,7 +17,7 @@
           <li><%= link_to ' マイページ',customers_path,class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' 商品一覧', products_path, class: 'fas fa-store nav-link text-light' %></li>
           <li><%= link_to ' カート', cart_items_path, class: 'fas fa-shopping-cart nav-link text-light' %></li>
-          <li><%= link_to ' logout', destroy_customer_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
+          <li><%= link_to ' ログアウト', destroy_customer_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
         <% else %>
           <li><%= link_to ' About',about_path,class: 'fas fa-link nav-link text-light' %></li>
           <li><%= link_to ' 商品一覧', products_path, class: 'fas fa-store nav-link text-light' %></li>
