@@ -38,15 +38,20 @@ class OrdersController < ApplicationController
       @address = shipping_infomation.address
       @name = shipping_infomation.name
     elsif params[:order][:shipping_method] == "3"
-      @zipcode = params[:order][:zipcode]
-      @address = params[:order][:address]
-      @name = params[:order][:name]
-      shipping_infomation = ShippingInformation.create(
-        customer_id: current_customer.id,
-        zipcode: @zipcode,
-        address: @address,
-        name: @name
-        )
+      if params[:order][:zipcode].present? && params[:order][:address].present? && params[:order][:name].present?
+        @zipcode = params[:order][:zipcode]
+        @address = params[:order][:address]
+        @name = params[:order][:name]
+        shipping_infomation = ShippingInformation.create(
+          customer_id: current_customer.id,
+          zipcode: @zipcode,
+          address: @address,
+          name: @name
+          )
+      else
+        flash.now["danger"] = "新しいお届け先情報に未入力の項目があります"
+        render :new
+      end
     end
   end
   
