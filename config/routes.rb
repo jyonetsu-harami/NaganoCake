@@ -34,12 +34,13 @@ Rails.application.routes.draw do
       get :order_success
     end
   end
-  resource :customers, only: [:show, :edit, :update] do
-    member do
-      get :unsubscribe
-      patch :withdraw
-    end
-  end
+
+  get 'my_page' => 'customers#show',as: :my_page
+  get 'my_page/edit' => 'customers#edit', as: :edit_my_page
+  get 'my_page/unsubscribe' => 'customers#unsubscribe', as: :unsubscribe_my_page
+  patch 'my_page' => 'customers#update', as: :mypage
+  patch 'my_page/withdraw' => 'customers#withdraw'
+
   resources :shipping_informations, only: [:index, :create, :edit, :update, :destroy]
 # destoryからdestroyへ変更
 end

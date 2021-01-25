@@ -1,18 +1,22 @@
 class CustomersController < ApplicationController
-  
+
   def show
-    @customer = current_customer
+    @customer = Customer.find(current_customer.id)
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer.id
   end
 
   def update
-    @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to customer_path(@customer.id)
+    @customer = current_customer
+    if @customer.update(customer_params)
+      redirect_to "/my_page"
+    else
+      render action: :edit
+    end
   end
+
 
   def unsubscribe
   end
@@ -28,7 +32,15 @@ class CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :zipcode, :address, :phone_number, :is_active)
+    params.require(:customer).permit(:last_name,
+                                     :first_name,
+                                     :last_name_kana,
+                                     :first_name_kana,
+                                     :email,
+                                     :zipcode,
+                                     :address,
+                                     :phone_number,
+                                     :is_active)
   end
 
 end

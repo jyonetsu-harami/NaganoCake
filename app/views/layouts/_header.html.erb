@@ -14,7 +14,7 @@
           <li><%= link_to 'ジャンル一覧', admin_genres_path ,class: 'nav-link text-light'%></li>
           <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'nav-link text-light'%></li>
         <% elsif customer_signed_in? %>
-          <li><%= link_to ' マイページ',customers_path,class: 'fas fa-home nav-link text-light' %></li>
+          <li><%= link_to ' マイページ',my_page_path,class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' 商品一覧', products_path, class: 'fas fa-store nav-link text-light' %></li>
           <li><%= link_to ' カート', cart_items_path, class: 'fas fa-shopping-cart nav-link text-light' %></li>
           <li><%= link_to ' ログアウト', destroy_customer_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
@@ -29,4 +29,3 @@
     </div>
   </nav>
 </header>
-
