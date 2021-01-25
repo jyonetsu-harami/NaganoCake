@@ -7,7 +7,4 @@ class HomesController < ApplicationController
 
   def about
   end
-  
-  def admin
-  end  
-end
+  end
