@@ -11,31 +11,31 @@ admin.email = "admin@admin"
 admin.password = "aaaaaa"
 end
 
-Genre.create!(
-  name: 'ケーキ',
-  is_active: 'true',
-)
-Product.create!(
-  genre_id: 1,
-  image_id: '1',
-  name: 'ショートケーキ',
-  description: '美味しいです。',
-  price: 600,
-  sales_status: 0,
-)
+# Genre.create!(
+#   name: 'ケーキ',
+#   is_active: 'true',
+# )
+# Product.create!(
+#   genre_id: 1,
+#   image_id: '1',
+#   name: 'ショートケーキ',
+#   description: '美味しいです。',
+#   price: 600,
+#   sales_status: 0,
+# )
 
-Customer.create!(
-  email: '1@1',
-  password: 'aaaaaa',
-  last_name: '山田',
-  first_name: '太郎',
-  last_name_kana: 'ヤマダ',
-  first_name_kana: 'タロウ',
-  zipcode: '1111111',
-  address: 'tokyo',
-  phone_number: '12345678900',
-  is_active: 'true',
-)
+# Customer.create!(
+#   email: '1@1',
+#   password: 'aaaaaa',
+#   last_name: '山田',
+#   first_name: '太郎',
+#   last_name_kana: 'ヤマダ',
+#   first_name_kana: 'タロウ',
+#   zipcode: '1111111',
+#   address: 'tokyo',
+#   phone_number: '12345678900',
+#   is_active: 'true',
+# )
 30.times do |n|
   gimei = Gimei.new
   Customer.create!(
