@@ -1,24 +1,22 @@
+<h4>商品一覧(全<%= @products.count %>件)</h4>
+
+<!--画像サイズ固定してない 上詰で配置-->
 <div class="wrapper">
-  <h4>商品一覧(全<%= @products.count %>件)</h4>
-  
-  <!--画像サイズ固定してない 上詰で配置-->
-  <div class="wrapper">
-    <div class="card-columns">  
-      <div class="row g-4" data-masonry='{"percentPosition": true }'>
-        <div class="col-12">
-          <% @product.each do |product| %>
-            <%= link_to product_path(product.id) do %>       
-             <div class="card">
-                <%= attachment_image_tag product, :image, class:"card-img-top" %>
-                <div class="card-body">
-                      <p class="card-title"><%= product.name %></p>
-                      <p class="card-text"><%= add_tax(product.price) %>円</p>
-                </div>
+  <div class="card-columns">  
+    <div class="row g-4" data-masonry='{"percentPosition": true }'>
+      <div class="col-12">
+        <% @product.each do |product| %>
+          <%= link_to product_path(product.id) do %>       
+           <div class="card">
+              <%= attachment_image_tag product, :image, class:"card-img-top" %>
+              <div class="card-body">
+                    <p class="card-title"><%= product.name %></p>
+                    <p class="card-text"><%= add_tax(product.price) %>円</p>
               </div>
-            <% end %>  
+            </div>
           <% end %>  
-        </div>  
-      </div>
+        <% end %>  
+      </div>  
     </div>
   </div>
 </div>
