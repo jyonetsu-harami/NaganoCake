@@ -22,7 +22,7 @@
         <%= attachment_image_tag random, :image, :fill, 250, 150 %>
       <% end %>
       <p><%= random.name %></p>
-      <p>￥<%= random.price %></p>
+      <p>￥<%= add_tax(random.price) %></p>
     </div>
   <% end %>
 </div>
