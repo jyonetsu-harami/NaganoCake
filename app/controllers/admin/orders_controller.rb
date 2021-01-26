@@ -3,9 +3,9 @@ class Admin::OrdersController < ApplicationController
   def index
   # params[:customer_id]に値が入っていたら@ordersにその顧客の注文一覧を代入する
     if params[:customer_id].present?
-      @orders = Customer.find(params[:customer_id]).orders.page(params[:page]).reverse_order
+      @orders = Customer.find(params[:customer_id]).orders.page(params[:page]).per(10).reverse_order
     else
-      @orders = Order.page(params[:page]).reverse_order
+      @orders = Order.page(params[:page]).per(10).reverse_order
     end
   end
   
