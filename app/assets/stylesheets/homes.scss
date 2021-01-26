@@ -1,5 +1,4 @@
 
-
 .homes-top-box {
   overflow: hidden;
   white-space: nowrap;
@@ -30,7 +29,7 @@
   font-weight: bold;
   color: black;
   text-align: center;
-  font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
   padding: 1rem 2rem;
   border: 2px solid #333;
   border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
@@ -59,7 +58,7 @@
 
 .about-nagano-cake-text {
   margin-top: 100px;
-　font-family: 'Amatic SC', cursive;
+　font-family: 'M PLUS Rounded 1c', sans-serif;
   font-weight: bold;
   margin: 0 auto;
   color: black;
@@ -81,3 +80,31 @@
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 10px 10px 15px -10px;
 }
+
+.about-chef {
+  border: 1px solid #000;
+  margin: 20px auto;
+  height: 370px;
+  background: image-url('chef-image.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 7%;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 10px 10px 15px -10px;
+}
+
+.about-nagano-cake-text-chef {
+  margin-top: 100px;
+　font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: bold;
+  margin: 0 auto;
+  color: black;
+  padding: 1rem 2rem;
+  border: 2px solid #333;
+  border-radius: .4em 2em .5em 3em/3em .5em 2em .5em;
+  background: rgba(255,255,255,110);
+  text-align: center;
+}
+
+
+
