@@ -1,27 +1,61 @@
 <h4>商品一覧(全<%= @products.count %>件)</h4>
-<div class="card-list-containar py-5">
-  <div class="d-flex justify-content-center flex-wrap">
-   <% @product.each do |product| %>
-     <div class="card w-25 mt-4 mx-3 shadow-sm">
-      <%= link_to product_path(product.id) do %>
-        <%= attachment_image_tag product, :image, class:"card-img-top" %>
-      <% end %>  
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12">
-              <p class="card-title"><%= product.name %></p>
-              <p class="card-text"><%= add_tax(product.price) %>円</p>
+
+<!--画像サイズ固定してない 上詰で配置-->
+<div class="wrapper">
+  <div class="card-columns">  
+    <div class="row g-4" data-masonry='{"percentPosition": true }'>
+      <div class="col-12">
+        <% @product.each do |product| %>
+          <%= link_to product_path(product.id) do %>       
+           <div class="card">
+              <%= attachment_image_tag product, :image, class:"card-img-top" %>
+              <div class="card-body">
+                    <p class="card-title"><%= product.name %></p>
+                    <p class="card-text"><%= add_tax(product.price) %>円</p>
+              </div>
             </div>
-          </div>
-        </div>
+          <% end %>  
+        <% end %>  
       </div>  
-    <% end %>  
-  </div>  
+    </div>
+  </div>
 </div>
+<!--画像サイズ固定-->
+<!--<div class="card-list-containar">-->
+<!--  <div class="d-flex justify-content-center flex-wrap">-->
+<!--   < @product.each do |product| %>-->
+<!--     <div class="card w-25 mt-4 mx-3 shadow-sm">-->
+<!--      <= link_to product_path(product.id) do %>-->
+<!--        <= attachment_image_tag product, :image, :fill, 400, 300, class: "card-img-top" %>-->
+<!--      < end %>  -->
+<!--        <div class="card-body">-->
+<!--          <div class="row">-->
+<!--            <div class="col-12">-->
+<!--              <p class="card-title"><= product.name %></p>-->
+<!--              <p class="card-text"><= add_tax(product.price) %>円</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>  -->
+<!--    < end %>  -->
+<!--  </div>  -->
+<!--</div>-->
 <%= paginate @product %>
+
 
 <style>
 .pagination {
   justify-content: center;
+}
+h4 {
+  padding-bottom: 10px;
+}
+p {
+  color: black;
+}
+.card:hover {
+  transform: scale(0.95);
+  transition-duration: 0.2s;
+  opacity: 0.8;
 }
 </style>
